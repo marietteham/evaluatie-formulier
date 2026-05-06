@@ -16,12 +16,26 @@
           if(favicon && window.isDarkMode) {
               favicon.href = favicon.href.replaceAll('favicon-2021-light%402x.png', 'favicon-2021-dark%402x.png');
           }
-      </script><link rel="canonical" href="https://form.jotform.com/261224356006044" />
+      </script>
+<script>
+  /* Blokkeer JotForm branding footer voordat de deferred-script hem kan initialiseren */
+  (function() {
+    var _bf = null;
+    Object.defineProperty(window, 'brandingFooter', {
+      get: function() { return _bf; },
+      set: function(obj) {
+        if (obj && typeof obj.init === 'function') { obj.init = function(){}; }
+        _bf = obj;
+      },
+      configurable: true
+    });
+  })();
+</script><link rel="canonical" href="https://form.jotform.com/261224356006044" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=1" />
 <meta name="HandheldFriendly" content="true" />
 <title>Evaluatie formulier coachingtraject</title>
-<link type="text/css" rel="stylesheet" href="https://cdn.jotfor.ms/s/static/327855d78b6/css/styles/formAdvancedSignature.css" />
-<link type="text/css" rel="stylesheet" href="https://cdn.jotfor.ms/stylebuilder/static/form-common.css?v=8e7b6ac
+<link type="text/css" rel="stylesheet" href="https://cdn.jotfor.ms/s/static/86b9ab52624/css/styles/formAdvancedSignature.css" />
+<link type="text/css" rel="stylesheet" href="https://cdn.jotfor.ms/stylebuilder/static/form-common.css?v=3a42a30
 "/>
 <style type="text/css">@media print{*{-webkit-print-color-adjust: exact !important;color-adjust: exact !important;}.form-section{display:inline!important}.form-pagebreak{display:none!important}.form-section-closed{height:auto!important}.page-section{position:initial!important}}</style>
 
@@ -38,7 +52,7 @@
           border: 0;
         }
       </style>
-    <link type="text/css" rel="stylesheet" href="https://cdn.jotfor.ms/themes/CSS/5e6b428acc8c4e222d1beb91.css?v=4.1.64877"/>
+    <link type="text/css" rel="stylesheet" href="https://cdn.jotfor.ms/themes/CSS/5e6b428acc8c4e222d1beb91.css?v=4.1.65301"/>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@700&family=Ubuntu:wght@400&display=swap" rel="stylesheet">
@@ -52,7 +66,10 @@
   [id*="jotform-branding"],
   .powered-by-jotform,
   [class*="powered-by"],
-  .form-branding {
+  .form-branding,
+  .jf-branding-container,
+  [class*="jf-branding"],
+  #jf-powered-by {
     display: none !important;
     visibility: hidden !important;
     height: 0 !important;
@@ -62,12 +79,14 @@
   body, .supernova {
     background-color: #CECBC3;
     font-family: 'Ubuntu', sans-serif;
+    font-size: 14px;
   }
 
   .form-all {
     background-color: #ffffff;
     border-radius: 4px;
     font-family: 'Ubuntu', sans-serif;
+    font-size: 14px;
   }
 
   /* Kopteksten */
@@ -87,6 +106,7 @@
   .form-sub-label {
     font-family: 'Ubuntu', sans-serif;
     color: #333333;
+    font-size: 13px;
   }
 
   /* Invoervelden */
@@ -94,6 +114,7 @@
   .form-textarea,
   .form-dropdown {
     font-family: 'Ubuntu', sans-serif;
+    font-size: 13px;
     border: 1px solid #CECBC3;
     border-radius: 3px;
   }
@@ -104,13 +125,49 @@
     box-shadow: 0 0 0 2px rgba(76, 191, 225, 0.25);
   }
 
-  /* Schaalvragen (1–10) */
-  .form-scale-table .rating-item label {
-    font-family: 'Ubuntu', sans-serif;
+  /* Schaalvragen – radio buttons en cijfers kleiner */
+  html.supernova .form-scale-table .rating-item input[type="radio"],
+  html.supernova .form-scale-table input.form-radio[type="radio"] {
+    width: 13px !important;
+    height: 13px !important;
+    min-width: 13px !important;
+    min-height: 13px !important;
+    max-width: 13px !important;
+    max-height: 13px !important;
+    -webkit-appearance: auto !important;
+    appearance: auto !important;
+  }
+  html.supernova .form-scale-table .rating-item-group {
+    gap: 1px !important;
+  }
+  html.supernova .form-scale-table .rating-item {
+    padding: 1px 3px !important;
+    min-width: 0 !important;
+  }
+  html.supernova .form-scale-table .rating-item > label,
+  html.supernova .form-scale-table .rating-item label {
+    font-family: 'Ubuntu', sans-serif !important;
+    font-size: 10px !important;
+    line-height: 1.2 !important;
+  }
+  html.supernova .form-scale-table .rating-item-title label {
+    font-size: 10px !important;
   }
   .form-radio:checked + label {
     color: #006a66;
     font-weight: 700;
+  }
+
+  /* Minder ruimte tussen velden */
+  .form-section .form-line,
+  .page-section .form-line {
+    padding-top: 6px !important;
+    padding-bottom: 6px !important;
+    margin-bottom: 0 !important;
+  }
+  .form-input-wide[data-type="control_head"] {
+    padding-top: 8px !important;
+    padding-bottom: 4px !important;
   }
 
   /* Verzendknop */
@@ -118,6 +175,7 @@
   .submit-button {
     font-family: 'Ubuntu', sans-serif;
     font-weight: 400;
+    font-size: 13px;
     background-color: #006a66 !important;
     border-color: #006a66 !important;
     color: #ffffff !important;
@@ -130,16 +188,17 @@
     border-color: #4cbfe1 !important;
   }
 
-  /* Subheader tekst (toestemmingssectie) */
+  /* Subheader tekst – zelfde grootte als rest */
   .form-subHeader {
     font-family: 'Ubuntu', sans-serif;
-    color: #555555;
-    font-size: 0.9em;
+    color: #333333;
+    font-size: 13px;
   }
 
   /* Checkboxes */
   .form-checkbox-item label {
     font-family: 'Ubuntu', sans-serif;
+    font-size: 13px;
   }
 
   /* Verzendknop links uitlijnen */
@@ -153,32 +212,45 @@
     background-color: #CECBC3;
     padding: 24px 0 8px 0;
   }
+
+  /* Voornaam / Achternaam label boven het veld */
+  .form-line[data-type="control_fullname"] .form-sub-label-container {
+    display: inline-flex;
+    flex-direction: column-reverse;
+    vertical-align: top;
+  }
+
+  /* "Datum" sublabel onder datumveld verbergen */
+  .form-line[data-type="control_datetime"] .form-sub-label {
+    display: none !important;
+  }
 </style>
-<link type="text/css" rel="stylesheet" href="https://cdn.jotfor.ms/s/static/327855d78b6/css/styles/payment/payment_styles.css?4.1.64877" />
-<link type="text/css" rel="stylesheet" href="https://cdn.jotfor.ms/s/static/327855d78b6/css/styles/payment/payment_feature.css?4.1.64877" />
+<link type="text/css" rel="stylesheet" href="https://cdn.jotfor.ms/s/static/86b9ab52624/css/styles/payment/payment_styles.css?4.1.65301" />
+<link type="text/css" rel="stylesheet" href="https://cdn.jotfor.ms/s/static/86b9ab52624/css/styles/payment/payment_feature.css?4.1.65301" />
 <script>window.enableEventObserver=true</script>
 <script>window.enableRenameUploadFile=false</script>
 <script>window.enableDateFieldSelectInputs=false</script>
 <script>window.CDN="https://cdn.jotfor.ms/"</script>
-<script>window.umdRootPath="https://cdn.jotfor.ms/s/umd/9206e5a9f19/"</script>
-<script>window.staticRootPath="https://cdn.jotfor.ms/s/static/327855d78b6/"</script>
+<script>window.umdRootPath="https://cdn.jotfor.ms/s/umd/86b9ab52624/"</script>
+<script>window.staticRootPath="https://cdn.jotfor.ms/s/static/86b9ab52624/"</script>
 <!--[if lt IE 9]>
-<script src="https://cdn.jotfor.ms/s/static/327855d78b6/js/vendor/flashcanvas.js" type="text/javascript"></script>
+<script src="https://cdn.jotfor.ms/s/static/86b9ab52624/js/vendor/flashcanvas.js" type="text/javascript"></script>
 <![endif]-->
-<script src="https://cdn.jotfor.ms/s/static/327855d78b6/js/vendor/jquery-3.7.1.min.js" type="text/javascript"></script>
-<script src="https://cdn.jotfor.ms/s/static/327855d78b6/js/vendor/jSignature/jSignature.js" type="text/javascript"></script>
-<script src="https://cdn.jotfor.ms/s/static/327855d78b6/js/vendor/jSignature/jSignature.CompressorBase30.js" type="text/javascript"></script>
-<script src="https://cdn.jotfor.ms/s/static/327855d78b6/js/vendor/jSignature/jSignature.CompressorSVG.js" type="text/javascript"></script>
-<script src="https://cdn.jotfor.ms/s/static/327855d78b6/js/vendor/jSignature/jSignature.UndoButton.js" type="text/javascript"></script>
-<script src="https://cdn.jotfor.ms/s/static/327855d78b6/js/vendor/jotform.signaturepad.new.js" type="text/javascript"></script>
-<script src="https://cdn.jotfor.ms/s/static/327855d78b6/static/prototype.forms.js" type="text/javascript"></script>
-<script src="https://cdn.jotfor.ms/s/static/327855d78b6/static/jotform.forms.js" type="text/javascript"></script>
-<script src="https://cdn.jotfor.ms/s/static/327855d78b6/js/vendor/maskedinput_5.0.9.min.js" type="text/javascript"></script>
-<script src="https://cdn.jotfor.ms/s/umd/9206e5a9f19/for-signature.js" type="text/javascript"></script>
-<script src="https://cdn.jotfor.ms/s/umd/9206e5a9f19/for-aria-notify-polyfill.js" type="text/javascript"></script>
-<script src="https://cdn.jotfor.ms/s/umd/9206e5a9f19/for-sign-form-integration.js" type="text/javascript" defer></script>
-<script src="https://cdn.jotfor.ms/s/static/327855d78b6/js/vendor/smoothscroll.min.js" type="text/javascript"></script>
-<script src="https://cdn.jotfor.ms/s/static/327855d78b6/js/errorNavigation.js" type="text/javascript"></script>
+<script src="https://cdn.jotfor.ms/s/static/86b9ab52624/js/vendor/jquery-3.7.1.min.js" type="text/javascript"></script>
+<script src="https://cdn.jotfor.ms/s/static/86b9ab52624/js/vendor/jSignature/jSignature.js" type="text/javascript"></script>
+<script src="https://cdn.jotfor.ms/s/static/86b9ab52624/js/vendor/jSignature/jSignature.CompressorBase30.js" type="text/javascript"></script>
+<script src="https://cdn.jotfor.ms/s/static/86b9ab52624/js/vendor/jSignature/jSignature.CompressorSVG.js" type="text/javascript"></script>
+<script src="https://cdn.jotfor.ms/s/static/86b9ab52624/js/vendor/jSignature/jSignature.UndoButton.js" type="text/javascript"></script>
+<script src="https://cdn.jotfor.ms/s/static/86b9ab52624/js/vendor/jotform.signaturepad.new.js" type="text/javascript"></script>
+<script src="https://cdn.jotfor.ms/s/static/86b9ab52624/static/prototype.forms.js" type="text/javascript"></script>
+<script src="https://cdn.jotfor.ms/s/static/86b9ab52624/static/jotform.forms.js" type="text/javascript"></script>
+<script src="https://cdn.jotfor.ms/s/static/86b9ab52624/js/vendor/maskedinput_5.0.9.min.js" type="text/javascript"></script>
+<script src="https://cdn.jotfor.ms/s/umd/86b9ab52624/for-signature.js" type="text/javascript"></script>
+<script src="https://cdn.jotfor.ms/s/umd/86b9ab52624/for-aria-notify-polyfill.js" type="text/javascript"></script>
+<script src="https://cdn.jotfor.ms/s/umd/86b9ab52624/for-sign-form-integration.js" type="text/javascript" defer></script>
+<script src="https://cdn.jotfor.ms/s/umd/86b9ab52624/for-form-branding-footer.js" type="text/javascript" defer></script>
+<script src="https://cdn.jotfor.ms/s/static/86b9ab52624/js/vendor/smoothscroll.min.js" type="text/javascript"></script>
+<script src="https://cdn.jotfor.ms/s/static/86b9ab52624/js/errorNavigation.js" type="text/javascript"></script>
 <script type="text/javascript">	JotForm.newDefaultTheme = true;
 	JotForm.extendsNewTheme = false;
 	// {GPT_APP_SCRIPT}
@@ -191,11 +263,12 @@
 	JotForm.originalLanguage = "nl";
 	JotForm.isFormViewTrackingAllowed = true;
 	JotForm.replaceTagTest = true;
-	JotForm.activeRedirect = "thanktext";
+	JotForm.activeRedirect = "thankurl";
 	JotForm.uploadServerURL = "https://upload.jotform.com/upload";
 	JotForm.clearFieldOnHide="disable";
 	JotForm.submitError="jumpToFirstError";
-	      try{
+	window.addEventListener('DOMContentLoaded',function(){window.brandingFooter.init({"formID":261224356006044,"campaign":"powered_by_jotform_le","isCardForm":false,"isLegacyForm":true,"formLanguage":"nl"})});
+      try{
         function isTrackingProhibited() {
       try {
         var isEUDomain = /(?:eu.jotform)|(?:jotformeu.com)/.test(window.location.host);
@@ -246,12 +319,48 @@
     
 	JotForm.init(function(){
 	/*INIT-START*/
+if (window.JotForm && JotForm.accessible) $('input_24').setAttribute('tabindex',0);
+if (window.JotForm && JotForm.accessible) $('input_25').setAttribute('tabindex',0);
+if (window.JotForm && JotForm.accessible) $('input_27').setAttribute('tabindex',0);
+
+ JotForm.calendarMonths = ["Januari","Februari","Maart","April","Mei","Juni","Juli","Augustus","September","Oktober","November","December"];
+ if (!JotForm.calenderViewMonths) JotForm.calenderViewMonths = {};  JotForm.calenderViewMonths[29] = ["Januari","Februari","Maart","April","Mei","Juni","Juli","Augustus","September","Oktober","November","December"];
+ if (!JotForm.calenderViewDays) JotForm.calenderViewDays = {};  JotForm.calenderViewDays[29] = ["Zondag","Maandag","Dinsdag","Woensdag","Donderdag","Vrijdag","Zaterdag","Zondag"];
+ JotForm.calendarDays = ["Zondag","Maandag","Dinsdag","Woensdag","Donderdag","Vrijdag","Zaterdag","Zondag"];
+ JotForm.calendarOther = {"today":"Vandaag"};
+ var languageOptions = document.querySelectorAll('#langList li'); 
+ for(var langIndex = 0; langIndex < languageOptions.length; langIndex++) { 
+   languageOptions[langIndex].on('click', function(e) { setTimeout(function(){ JotForm.setCalendar("29", false, {"days":{"monday":true,"tuesday":true,"wednesday":true,"thursday":true,"friday":true,"saturday":true,"sunday":true},"future":true,"past":true,"custom":false,"ranges":false,"start":"","end":"","countSelectedDaysOnly":false}); }, 0); });
+ } 
+ JotForm.onTranslationsFetch(function() { JotForm.setCalendar("29", false, {"days":{"monday":true,"tuesday":true,"wednesday":true,"thursday":true,"friday":true,"saturday":true,"sunday":true},"future":true,"past":true,"custom":false,"ranges":false,"start":"","end":"","countSelectedDaysOnly":false}); });
+
+ JotForm.calendarMonths = ["Januari","Februari","Maart","April","Mei","Juni","Juli","Augustus","September","Oktober","November","December"];
+ if (!JotForm.calenderViewMonths) JotForm.calenderViewMonths = {};  JotForm.calenderViewMonths[30] = ["Januari","Februari","Maart","April","Mei","Juni","Juli","Augustus","September","Oktober","November","December"];
+ if (!JotForm.calenderViewDays) JotForm.calenderViewDays = {};  JotForm.calenderViewDays[30] = ["Zondag","Maandag","Dinsdag","Woensdag","Donderdag","Vrijdag","Zaterdag","Zondag"];
+ JotForm.calendarDays = ["Zondag","Maandag","Dinsdag","Woensdag","Donderdag","Vrijdag","Zaterdag","Zondag"];
+ JotForm.calendarOther = {"today":"Vandaag"};
+ var languageOptions = document.querySelectorAll('#langList li'); 
+ for(var langIndex = 0; langIndex < languageOptions.length; langIndex++) { 
+   languageOptions[langIndex].on('click', function(e) { setTimeout(function(){ JotForm.setCalendar("30", false, {"days":{"monday":true,"tuesday":true,"wednesday":true,"thursday":true,"friday":true,"saturday":true,"sunday":true},"future":true,"past":true,"custom":false,"ranges":false,"start":"","end":"","countSelectedDaysOnly":false}); }, 0); });
+ } 
+ JotForm.onTranslationsFetch(function() { JotForm.setCalendar("30", false, {"days":{"monday":true,"tuesday":true,"wednesday":true,"thursday":true,"friday":true,"saturday":true,"sunday":true},"future":true,"past":true,"custom":false,"ranges":false,"start":"","end":"","countSelectedDaysOnly":false}); });
+if (window.JotForm && JotForm.accessible) $('input_37').setAttribute('tabindex',0);
+if (window.JotForm && JotForm.accessible) $('input_31').setAttribute('tabindex',0);
 if (window.JotForm && JotForm.accessible) $('input_8').setAttribute('tabindex',0);
 if (window.JotForm && JotForm.accessible) $('input_11').setAttribute('tabindex',0);
 if (window.JotForm && JotForm.accessible) $('input_12').setAttribute('tabindex',0);
 if (window.JotForm && JotForm.accessible) $('input_13').setAttribute('tabindex',0);
 if (window.JotForm && JotForm.accessible) $('input_14').setAttribute('tabindex',0);
+if (window.JotForm && JotForm.accessible) $('input_41').setAttribute('tabindex',0);
+if (window.JotForm && JotForm.accessible) $('input_45').setAttribute('tabindex',0);
+if (window.JotForm && JotForm.accessible) $('input_43').setAttribute('tabindex',0);
+if (window.JotForm && JotForm.accessible) $('input_49').setAttribute('tabindex',0);
+if (window.JotForm && JotForm.accessible) $('input_53').setAttribute('tabindex',0);
+if (window.JotForm && JotForm.accessible) $('input_51').setAttribute('tabindex',0);
+if (window.JotForm && JotForm.accessible) $('input_46').setAttribute('tabindex',0);
 if (window.JotForm && JotForm.accessible) $('input_15').setAttribute('tabindex',0);
+if (window.JotForm && JotForm.accessible) $('input_54').setAttribute('tabindex',0);
+if (window.JotForm && JotForm.accessible) $('input_55').setAttribute('tabindex',0);
 
  JotForm.calendarMonths = ["Januari","Februari","Maart","April","Mei","Juni","Juli","Augustus","September","Oktober","November","December"];
  if (!JotForm.calenderViewMonths) JotForm.calenderViewMonths = {};  JotForm.calenderViewMonths[19] = ["Januari","Februari","Maart","April","Mei","Juni","Juli","Augustus","September","Oktober","November","December"];
@@ -269,11 +378,11 @@ if (window.JotForm && JotForm.accessible) $('input_21').setAttribute('tabindex',
 	});
 
    setTimeout(function() {
-JotForm.paymentExtrasOnTheFly([null,{"name":"heading","qid":"1","text":"Evaluatie formulier coachingtraject","type":"control_head"},{"name":"submit2","qid":"2","text":"Versturen","type":"control_button"},{"description":"","name":"handtekening","qid":"3","subLabel":"","text":"Handtekening ","type":"control_signature"},null,null,{"description":"","name":"typEen6","qid":"6","text":"1. In hoeverre heeft het coachtraject bijgedragen aan het bereiken van jouw doelen?  ","type":"control_scale"},null,{"description":"","mde":"No","name":"toelichting","qid":"8","subLabel":"","text":"Toelichting: ","type":"control_textarea","wysiwyg":"Disable"},{"description":"","name":"2Hoe","qid":"9","text":"2. Hoe waardeer je de kwaliteit van de coaching die je hebt ontvangen?    ","type":"control_scale"},null,{"description":"","mde":"No","name":"toelichting11","qid":"11","subLabel":"","text":"Toelichting: ","type":"control_textarea","wysiwyg":"Disable"},{"description":"","mde":"No","name":"3Wat","qid":"12","subLabel":"","text":"3. Wat heeft het coachtraject jou opgeleverd? (inzichten, gedragsverandering, resultaten)  ","type":"control_textarea","wysiwyg":"Disable"},{"description":"","mde":"No","name":"4Welk","qid":"13","subLabel":"","text":"4. Welk moment of welke interventie heeft voor jou het meeste verschil gemaakt?  ","type":"control_textarea","wysiwyg":"Disable"},{"description":"","mde":"No","name":"5Wat","qid":"14","subLabel":"","text":"5. Wat had ik als coach anders of beter kunnen doen?  ","type":"control_textarea","wysiwyg":"Disable"},{"description":"","mde":"No","name":"6Wat","qid":"15","subLabel":"","text":"6. Wat neem je mee naar de toekomst? Welke verandering houd je vast?","type":"control_textarea","wysiwyg":"Disable"},{"description":"","name":"7Zou","qid":"16","text":"7. Zou je mij aan anderen aanbevelen?","type":"control_checkbox"},{"name":"toestemmingEn17","qid":"17","text":"Toestemming en ondertekening ","type":"control_head"},{"description":"","name":"naam","qid":"18","text":"Naam","type":"control_fullname"},{"description":"","name":"datum","qid":"19","text":"Datum","type":"control_datetime"},null,{"description":"","name":"plaats","qid":"21","subLabel":"","text":"Plaats","type":"control_textbox"}]);}, 20); 
+JotForm.paymentExtrasOnTheFly([null,{"name":"heading","qid":"1","text":"Evaluatie formulier coachingtraject","type":"control_head"},{"name":"submit2","qid":"2","text":"Versturen","type":"control_button"},{"description":"","name":"handtekening","qid":"3","subLabel":"","text":"Handtekening ","type":"control_signature"},null,null,{"description":"","name":"typEen6","qid":"6","text":"1. In hoeverre heeft het coachtraject bijgedragen aan het bereiken van jouw doelen?  ","type":"control_scale"},null,{"description":"","mde":"No","name":"toelichting","qid":"8","subLabel":"","text":"Toelichting: ","type":"control_textarea","wysiwyg":"Disable"},{"description":"","name":"2Hoe","qid":"9","text":"2. Hoe waardeer je de kwaliteit van de coaching die je hebt ontvangen?    ","type":"control_scale"},null,{"description":"","mde":"No","name":"toelichting11","qid":"11","subLabel":"","text":"Toelichting: ","type":"control_textarea","wysiwyg":"Disable"},{"description":"","mde":"No","name":"3Wat","qid":"12","subLabel":"","text":"3. Wat heeft het coachtraject jou opgeleverd? (inzichten, gedragsverandering, resultaten)  ","type":"control_textarea","wysiwyg":"Disable"},{"description":"","mde":"No","name":"4Welk","qid":"13","subLabel":"Denk bijvoorbeeld aan: persoonlijke groei, professionele ontwikkeling, effect op je rol, je team of je organisatie en eventuele zakelijke of meetbare resultaten.  ","text":"4. Welke concrete opbrengsten heeft de coaching jou en je werk opgeleverd?   ","type":"control_textarea","wysiwyg":"Disable"},{"description":"","mde":"No","name":"5Wat","qid":"14","subLabel":"","text":"5. Welk moment of welke interventie heeft voor jou het meeste verschil gemaakt? ","type":"control_textarea","wysiwyg":"Disable"},{"description":"","mde":"No","name":"13Wat","qid":"15","subLabel":"","text":"13. Wat had ik als coach anders of beter kunnen doen?  ","type":"control_textarea","wysiwyg":"Disable"},{"description":"","name":"15Zou","qid":"16","text":"15. Zou je mij aan anderen aanbevelen?","type":"control_checkbox"},{"name":"toestemmingEn17","qid":"17","text":"Toestemming en ondertekening ","type":"control_head"},{"description":"","name":"naam","qid":"18","text":"Naam","type":"control_fullname"},{"description":"","name":"datum","qid":"19","text":"Datum","type":"control_datetime"},null,{"description":"","name":"plaats","qid":"21","subLabel":"","text":"Plaats","type":"control_textbox"},null,null,{"description":"","name":"initialenClient","qid":"24","subLabel":"","text":"Initialen client:  ","type":"control_textbox"},{"description":"","name":"functie","qid":"25","subLabel":"","text":"Functie: ","type":"control_textbox"},null,{"description":"","name":"organisatie","qid":"27","subLabel":"","text":"Organisatie: ","type":"control_textbox"},null,{"description":"","name":"startdatumTraject","qid":"29","text":"Startdatum traject: ","type":"control_datetime"},{"description":"","name":"einddatumTraject","qid":"30","text":"Einddatum traject: ","type":"control_datetime"},{"description":"","mde":"No","name":"eventueleToelichting","qid":"31","subLabel":"","text":"Eventuele toelichting op de data of het verloop van het traject: ","type":"control_textarea","wysiwyg":"Disable"},{"name":"gegevensCoachingtraject","qid":"32","text":"Gegevens coachingtraject","type":"control_head"},{"name":"evaluatieVan","qid":"33","text":"Evaluatie van het traject","type":"control_head"},{"name":"opbrengstenVan","qid":"34","text":"Opbrengsten van de coaching ","type":"control_head"},null,{"description":"","name":"duuraantal","qid":"36","subLabel":"","text":"Duur (aantal sessies) ","type":"control_number"},{"description":"","mde":"No","name":"dataVan","qid":"37","subLabel":"","text":"Data van de sessie: ","type":"control_textarea","wysiwyg":"Disable"},{"name":"feedbackOp","qid":"38","text":"Feedback op de effectiviteit van mijn coachvaardigheden  ","type":"control_head"},{"name":"toekomstEn","qid":"39","text":"Toekomst en aanbeveling   ","type":"control_head"},{"description":"","name":"6Het","qid":"40","text":"6. Het opbouwen van vertrouwen en een veilige werkrelatie  ","type":"control_scale"},{"description":"","mde":"No","name":"toelichtingvoorbeeld","qid":"41","subLabel":"","text":"Toelichting\u002Fvoorbeeld: ","type":"control_textarea","wysiwyg":"Disable"},{"description":"","name":"7Aanwezigheid","qid":"42","text":"7. Aanwezigheid en aandacht tijdens de sessies   ","type":"control_scale"},{"description":"","mde":"No","name":"toelichtingvoorbeeld43","qid":"43","subLabel":"","text":"Toelichting\u002Fvoorbeeld: ","type":"control_textarea","wysiwyg":"Disable"},{"description":"","name":"8Actief","qid":"44","text":"8. Actief en aandachtig luisteren  ","type":"control_scale"},{"description":"","mde":"No","name":"toelichtingvoorbeeld45","qid":"45","subLabel":"","text":"Toelichting\u002Fvoorbeeld: ","type":"control_textarea","wysiwyg":"Disable"},{"description":"","mde":"No","name":"toelichtingvoorbeeld46","qid":"46","subLabel":"","text":"Toelichting\u002Fvoorbeeld: ","type":"control_textarea","wysiwyg":"Disable"},{"description":"","name":"9Het","qid":"47","text":"9. Het stellen van krachtige, op inzicht gerichte vragen  ","type":"control_scale"},{"description":"","name":"10Het","qid":"48","text":"10. Het stimuleren van leren, reflectie en bewustwording  ","type":"control_scale"},{"description":"","mde":"No","name":"toelichtingvoorbeeld49","qid":"49","subLabel":"","text":"Toelichting\u002Fvoorbeeld: ","type":"control_textarea","wysiwyg":"Disable"},{"description":"","name":"12Het","qid":"50","text":"12. Het hanteren van het coachproces en de structuur van de sessies    ","type":"control_scale"},{"description":"","mde":"No","name":"toelichtingvoorbeeld51","qid":"51","subLabel":"","text":"Toelichting\u002Fvoorbeeld: ","type":"control_textarea","wysiwyg":"Disable"},{"description":"","name":"11Het52","qid":"52","text":"11. Het ondersteunen bij het formuleren en behalen van doelen  ","type":"control_scale"},{"description":"","mde":"No","name":"toelichtingvoorbeeld53","qid":"53","subLabel":"","text":"Toelichting\u002Fvoorbeeld: ","type":"control_textarea","wysiwyg":"Disable"},{"description":"","mde":"No","name":"14Wat54","qid":"54","subLabel":"","text":"14. Wat neem je mee naar de toekomst? Welke verandering houd je vast?","type":"control_textarea","wysiwyg":"Disable"},{"description":"","mde":"No","name":"toelichting55","qid":"55","subLabel":"","text":"Toelichting: ","type":"control_textarea","wysiwyg":"Disable"}]);}, 20); 
 </script>
 </head>
 <body>
-<form class="jotform-form" onsubmit="return typeof testSubmitFunction !== 'undefined' && testSubmitFunction();" action="https://submit.jotform.com/submit/261224356006044" method="post" name="form_261224356006044" id="261224356006044" accept-charset="utf-8" autocomplete="on"><input type="hidden" name="formID" value="261224356006044" /><input type="hidden" id="JWTContainer" value="" /><input type="hidden" id="cardinalOrderNumber" value="" /><input type="hidden" id="jsExecutionTracker" name="jsExecutionTracker" value="build-date-1777825240860" /><input type="hidden" id="submitSource" name="submitSource" value="unknown" /><input type="hidden" id="submitDate" name="submitDate" value="undefined" /><input type="hidden" id="buildDate" name="buildDate" value="1777825240860" /><input type="hidden" name="uploadServerUrl" value="https://upload.jotform.com/upload" /><input type="hidden" name="eventObserver" value="1" />
+<form class="jotform-form" onsubmit="return typeof testSubmitFunction !== 'undefined' && testSubmitFunction();" action="https://submit.jotform.com/submit/261224356006044" method="post" name="form_261224356006044" id="261224356006044" accept-charset="utf-8" autocomplete="on"><input type="hidden" name="formID" value="261224356006044" /><input type="hidden" id="JWTContainer" value="" /><input type="hidden" id="cardinalOrderNumber" value="" /><input type="hidden" id="jsExecutionTracker" name="jsExecutionTracker" value="build-date-1778056320282" /><input type="hidden" id="submitSource" name="submitSource" value="unknown" /><input type="hidden" id="submitDate" name="submitDate" value="undefined" /><input type="hidden" id="buildDate" name="buildDate" value="1778056320282" /><input type="hidden" name="uploadServerUrl" value="https://upload.jotform.com/upload" /><input type="hidden" name="eventObserver" value="1" />
   <div id="formCoverLogo" style="margin-bottom:32px" class="form-cover-wrapper form-has-cover form-page-cover-image-align-center">
     <div class="form-page-cover-image-wrapper" style="max-width:752px"><img src="https://www.jotform.com/uploads/anoukromeijn/form_files/Logo-Mariette-Ham-POS.69f7724123ca87.07630244.png" class="form-page-cover-image" width="322" height="140" alt="Evaluatie formulier coachingtraject" style="aspect-ratio:322/140" /></div>
   </div>
@@ -283,6 +392,54 @@ JotForm.paymentExtrasOnTheFly([null,{"name":"heading","qid":"1","text":"Evaluati
         <div class="form-header-group header-large">
           <div class="header-text httal htvam">
             <h1 id="header_1" class="form-header" data-component="header">Evaluatie formulier coachingtraject</h1>
+            <div id="subHeader_1" class="form-subHeader">Hartelijk dank voor het invullen van dit evaluatieformulier. Jouw feedback helpt mij om de kwaliteit van mijn coaching te blijven verbeteren en is van waarde voor mijn professionele ontwikkeling en accreditatie. </div>
+          </div>
+        </div>
+      </li>
+      <li id="cid_32" class="form-input-wide" data-type="control_head">
+        <div class="form-header-group header-default">
+          <div class="header-text httal htvam">
+            <h2 id="header_32" class="form-header" data-component="header">Gegevens coachingtraject</h2>
+            <div id="subHeader_32" class="form-subHeader">Vul hieronder de basisgegevens van het coachingtraject in.</div>
+          </div>
+        </div>
+      </li>
+      <li class="form-line" data-type="control_textbox" id="id_24"><label class="form-label form-label-top form-label-auto" id="label_24" for="input_24"> Initialen cliënt: </label>
+        <div id="cid_24" class="form-input-wide" data-layout="half"> <input type="text" id="input_24" name="q24_initialenClient" data-type="input-textbox" class="form-textbox" data-defaultvalue="" style="width:310px" size="310" data-component="textbox" aria-labelledby="label_24" value="" /> </div>
+      </li>
+      <li class="form-line" data-type="control_textbox" id="id_25"><label class="form-label form-label-top form-label-auto" id="label_25" for="input_25"> Functie: </label>
+        <div id="cid_25" class="form-input-wide" data-layout="half"> <input type="text" id="input_25" name="q25_functie" data-type="input-textbox" class="form-textbox" data-defaultvalue="" style="width:310px" size="310" data-component="textbox" aria-labelledby="label_25" value="" /> </div>
+      </li>
+      <li class="form-line" data-type="control_textbox" id="id_27"><label class="form-label form-label-top form-label-auto" id="label_27" for="input_27"> Organisatie: </label>
+        <div id="cid_27" class="form-input-wide" data-layout="half"> <input type="text" id="input_27" name="q27_organisatie" data-type="input-textbox" class="form-textbox" data-defaultvalue="" style="width:310px" size="310" data-component="textbox" aria-labelledby="label_27" value="" /> </div>
+      </li>
+      <li class="form-line form-line-column form-col-1" data-type="control_datetime" id="id_29"><span class="form-label form-label-top" id="label_29"> Startdatum traject: </span>
+        <div id="cid_29" class="form-input-wide" data-layout="half">
+          <div data-wrapper-react="true" role="group" aria-labelledby="label_29">
+            <div style="display:none"><span class="form-sub-label-container" style="vertical-align:top"><input class="form-textbox validate[limitDate]" id="month_29" name="q29_startdatumTraject[month]" type="tel" size="2" data-maxlength="2" data-age="" maxLength="2" autoComplete="off" value="" /><span class="date-separate" aria-hidden="true"> -</span><label class="form-sub-label" for="month_29" id="sublabel_29_month" style="min-height:13px">Maand</label></span><span class="form-sub-label-container" style="vertical-align:top"><input class="form-textbox validate[limitDate]" id="day_29" name="q29_startdatumTraject[day]" type="tel" size="2" data-maxlength="2" data-age="" maxLength="2" autoComplete="off" value="" /><span class="date-separate" aria-hidden="true"> -</span><label class="form-sub-label" for="day_29" id="sublabel_29_day" style="min-height:13px">Dag</label></span><span class="form-sub-label-container" style="vertical-align:top"><input class="form-textbox validate[limitDate]" id="year_29" name="q29_startdatumTraject[year]" type="tel" size="4" data-maxlength="4" data-age="" maxLength="4" autoComplete="off" value="" /><label class="form-sub-label" for="year_29" id="sublabel_29_year" style="min-height:13px">Jaar</label></span></div><span class="form-sub-label-container" style="vertical-align:top"><input class="form-textbox validate[limitDate, validateLiteDate]" id="lite_mode_29" type="text" size="12" data-maxlength="12" maxLength="12" data-age="" data-format="mmddyyyy" data-seperator="-" placeholder="MM-DD-YYYY" data-placeholder="MM-DD-YYYY" autoComplete="off" value="" /><button type="button" class=" newDefaultTheme-dateIcon focusable icon-liteMode" id="input_29_pick" data-component="datetime" aria-label="Choose date" aria-controls="calendar_29" aria-haspopup="dialog" aria-expanded="false" data-allow-time="No" data-version="v2"></button><label class="form-sub-label" for="lite_mode_29" id="sublabel_29_litemode" style="min-height:13px">Datum</label></span>
+          </div>
+        </div>
+      </li>
+      <li class="form-line form-line-column form-col-2" data-type="control_datetime" id="id_30"><span class="form-label form-label-top" id="label_30"> Einddatum traject: </span>
+        <div id="cid_30" class="form-input-wide" data-layout="half">
+          <div data-wrapper-react="true" role="group" aria-labelledby="label_30">
+            <div style="display:none"><span class="form-sub-label-container" style="vertical-align:top"><input class="form-textbox validate[limitDate]" id="month_30" name="q30_einddatumTraject[month]" type="tel" size="2" data-maxlength="2" data-age="" maxLength="2" autoComplete="off" value="" /><span class="date-separate" aria-hidden="true"> -</span><label class="form-sub-label" for="month_30" id="sublabel_30_month" style="min-height:13px">Maand</label></span><span class="form-sub-label-container" style="vertical-align:top"><input class="form-textbox validate[limitDate]" id="day_30" name="q30_einddatumTraject[day]" type="tel" size="2" data-maxlength="2" data-age="" maxLength="2" autoComplete="off" value="" /><span class="date-separate" aria-hidden="true"> -</span><label class="form-sub-label" for="day_30" id="sublabel_30_day" style="min-height:13px">Dag</label></span><span class="form-sub-label-container" style="vertical-align:top"><input class="form-textbox validate[limitDate]" id="year_30" name="q30_einddatumTraject[year]" type="tel" size="4" data-maxlength="4" data-age="" maxLength="4" autoComplete="off" value="" /><label class="form-sub-label" for="year_30" id="sublabel_30_year" style="min-height:13px">Jaar</label></span></div><span class="form-sub-label-container" style="vertical-align:top"><input class="form-textbox validate[limitDate, validateLiteDate]" id="lite_mode_30" type="text" size="12" data-maxlength="12" maxLength="12" data-age="" data-format="mmddyyyy" data-seperator="-" placeholder="MM-DD-YYYY" data-placeholder="MM-DD-YYYY" autoComplete="off" value="" /><button type="button" class=" newDefaultTheme-dateIcon focusable icon-liteMode" id="input_30_pick" data-component="datetime" aria-label="Choose date" aria-controls="calendar_30" aria-haspopup="dialog" aria-expanded="false" data-allow-time="No" data-version="v2"></button><label class="form-sub-label" for="lite_mode_30" id="sublabel_30_litemode" style="min-height:13px">Datum</label></span>
+          </div>
+        </div>
+      </li>
+      <li class="form-line" data-type="control_number" id="id_36"><label class="form-label form-label-top form-label-auto" id="label_36" for="input_36"> Duur (aantal sessies) </label>
+        <div id="cid_36" class="form-input-wide" data-layout="half"> <input type="number" id="input_36" name="q36_duuraantal" data-type="input-number" class=" form-number-input form-textbox" data-defaultvalue="" style="width:310px" size="310" placeholder="bijv. 23" data-component="number" aria-labelledby="label_36" step="any" value="" /> </div>
+      </li>
+      <li class="form-line" data-type="control_textarea" id="id_37"><label class="form-label form-label-top form-label-auto" id="label_37" for="input_37"> Data van de sessie: </label>
+        <div id="cid_37" class="form-input-wide" data-layout="full"> <textarea id="input_37" class="form-textarea" name="q37_dataVan" style="width:648px;height:50px" data-component="textarea" aria-labelledby="label_37"></textarea> </div>
+      </li>
+      <li class="form-line" data-type="control_textarea" id="id_31"><label class="form-label form-label-top form-label-auto" id="label_31" for="input_31"> Eventuele toelichting op de data of het verloop van het traject: </label>
+        <div id="cid_31" class="form-input-wide" data-layout="full"> <textarea id="input_31" class="form-textarea" name="q31_eventueleToelichting" style="width:648px;height:50px" data-component="textarea" aria-labelledby="label_31"></textarea> </div>
+      </li>
+      <li id="cid_33" class="form-input-wide" data-type="control_head">
+        <div class="form-header-group header-default">
+          <div class="header-text httal htvam">
+            <h2 id="header_33" class="form-header" data-component="header">Evaluatie van het traject</h2>
           </div>
         </div>
       </li>
@@ -328,28 +485,203 @@ JotForm.paymentExtrasOnTheFly([null,{"name":"heading","qid":"1","text":"Evaluati
       <li class="form-line" data-type="control_textarea" id="id_11"><label class="form-label form-label-top form-label-auto" id="label_11" for="input_11"> Toelichting: </label>
         <div id="cid_11" class="form-input-wide" data-layout="full"> <textarea id="input_11" class="form-textarea" name="q11_toelichting11" style="width:648px;height:50px" data-component="textarea" aria-labelledby="label_11"></textarea> </div>
       </li>
+      <li id="cid_34" class="form-input-wide" data-type="control_head">
+        <div class="form-header-group header-default">
+          <div class="header-text httal htvam">
+            <h2 id="header_34" class="form-header" data-component="header">Opbrengsten van de coaching </h2>
+          </div>
+        </div>
+      </li>
       <li class="form-line" data-type="control_textarea" id="id_12"><label class="form-label form-label-top form-label-auto" id="label_12" for="input_12"> 3. Wat heeft het coachtraject jou opgeleverd? (inzichten, gedragsverandering, resultaten) </label>
         <div id="cid_12" class="form-input-wide" data-layout="full"> <textarea id="input_12" class="form-textarea" name="q12_3Wat" style="width:648px;height:80px" data-component="textarea" aria-labelledby="label_12"></textarea> </div>
       </li>
-      <li class="form-line" data-type="control_textarea" id="id_13"><label class="form-label form-label-top form-label-auto" id="label_13" for="input_13"> 4. Welk moment of welke interventie heeft voor jou het meeste verschil gemaakt? </label>
-        <div id="cid_13" class="form-input-wide" data-layout="full"> <textarea id="input_13" class="form-textarea" name="q13_4Welk" style="width:648px;height:80px" data-component="textarea" aria-labelledby="label_13"></textarea> </div>
+      <li class="form-line" data-type="control_textarea" id="id_13"><label class="form-label form-label-top form-label-auto" id="label_13" for="input_13"> 4. Welke concrete opbrengsten heeft de coaching jou en je werk opgeleverd? </label>
+        <div id="cid_13" class="form-input-wide" data-layout="full"> <span class="form-sub-label-container" style="vertical-align:top"><textarea id="input_13" class="form-textarea" name="q13_4Welk" style="width:648px;height:80px" data-component="textarea" aria-labelledby="label_13 sublabel_input_13"></textarea><label class="form-sub-label" for="input_13" id="sublabel_input_13" style="min-height:13px">Denk bijvoorbeeld aan: persoonlijke groei, professionele ontwikkeling, effect op je rol, je team of je organisatie en eventuele zakelijke of meetbare resultaten. </label></span> </div>
       </li>
-      <li class="form-line" data-type="control_textarea" id="id_14"><label class="form-label form-label-top form-label-auto" id="label_14" for="input_14"> 5. Wat had ik als coach anders of beter kunnen doen? </label>
+      <li class="form-line" data-type="control_textarea" id="id_14"><label class="form-label form-label-top form-label-auto" id="label_14" for="input_14"> 5. Welk moment of welke interventie heeft voor jou het meeste verschil gemaakt? </label>
         <div id="cid_14" class="form-input-wide" data-layout="full"> <textarea id="input_14" class="form-textarea" name="q14_5Wat" style="width:648px;height:80px" data-component="textarea" aria-labelledby="label_14"></textarea> </div>
       </li>
-      <li class="form-line" data-type="control_textarea" id="id_15"><label class="form-label form-label-top form-label-auto" id="label_15" for="input_15"> 6. Wat neem je mee naar de toekomst? Welke verandering houd je vast? </label>
-        <div id="cid_15" class="form-input-wide" data-layout="full"> <textarea id="input_15" class="form-textarea" name="q15_6Wat" style="width:648px;height:80px" data-component="textarea" aria-labelledby="label_15"></textarea> </div>
-      </li>
-      <li class="form-line" data-type="control_checkbox" id="id_16"><span class="form-label form-label-top form-label-auto" id="label_16"> 7. Zou je mij aan anderen aanbevelen? </span>
-        <div id="cid_16" class="form-input-wide" data-layout="full">
-          <div class="form-single-column" role="group" aria-labelledby="label_16" data-component="checkbox"><span class="form-checkbox-item" style="clear:left"><span class="dragger-item"></span><input type="checkbox" class="form-checkbox" id="input_16_0" name="q16_7Zou[]" aria-labelledby="label_input_16_0" value="Ja" /><label id="label_input_16_0" for="input_16_0">Ja</label></span><span class="form-checkbox-item" style="clear:left"><span class="dragger-item"></span><input type="checkbox" class="form-checkbox" id="input_16_1" name="q16_7Zou[]" aria-labelledby="label_input_16_1" value="Nee" /><label id="label_input_16_1" for="input_16_1">Nee</label></span><span class="form-checkbox-item" style="clear:left"><span class="dragger-item"></span><input type="checkbox" class="form-checkbox" id="input_16_2" name="q16_7Zou[]" aria-labelledby="label_input_16_2" value="Misschien" /><label id="label_input_16_2" for="input_16_2">Misschien</label></span></div>
+      <li id="cid_38" class="form-input-wide" data-type="control_head">
+        <div class="form-header-group header-default">
+          <div class="header-text httal htvam">
+            <h2 id="header_38" class="form-header" data-component="header">Feedback op de effectiviteit van mijn coachvaardigheden </h2>
+            <div id="subHeader_38" class="form-subHeader">Geef per onderdeel aan in welke mate je deze als effectief hebt ervaren (1 = helemaal niet, 10 = volledig). Deze feedback gebruik ik voor mijn professionele ontwikkeling en accreditatie (NOBCO/EMCC). </div>
+          </div>
         </div>
+      </li>
+      <li class="form-line" data-type="control_scale" id="id_40"><label class="form-label form-label-top form-label-auto" id="label_40" for="input_40"> 6. Het opbouwen van vertrouwen en een veilige werkrelatie </label>
+        <div id="cid_40" class="form-input-wide" data-layout="full"> <span class="form-sub-label-container" style="vertical-align:top">
+            <div role="radiogroup" aria-labelledby="label_40 sublabel_input_40_description" cellPadding="4" cellSpacing="0" class="form-scale-table" data-component="scale">
+              <div class="rating-item-group">
+                <div class="rating-item"><span class="rating-item-title for-from"><label for="input_40_worst" aria-hidden="true">Helemaal niet </label></span><input aria-labelledby="label_input_40" class="form-radio" type="radio" name="q40_6Het" title="1" id="input_40_1" value="1" /><label for="input_40_1">1</label></div>
+                <div class="rating-item"><input aria-labelledby="label_input_40" class="form-radio" type="radio" name="q40_6Het" title="2" id="input_40_2" value="2" /><label for="input_40_2">2</label></div>
+                <div class="rating-item"><input aria-labelledby="label_input_40" class="form-radio" type="radio" name="q40_6Het" title="3" id="input_40_3" value="3" /><label for="input_40_3">3</label></div>
+                <div class="rating-item"><input aria-labelledby="label_input_40" class="form-radio" type="radio" name="q40_6Het" title="4" id="input_40_4" value="4" /><label for="input_40_4">4</label></div>
+                <div class="rating-item"><input aria-labelledby="label_input_40" class="form-radio" type="radio" name="q40_6Het" title="5" id="input_40_5" value="5" /><label for="input_40_5">5</label></div>
+                <div class="rating-item"><input aria-labelledby="label_input_40" class="form-radio" type="radio" name="q40_6Het" title="6" id="input_40_6" value="6" /><label for="input_40_6">6</label></div>
+                <div class="rating-item"><input aria-labelledby="label_input_40" class="form-radio" type="radio" name="q40_6Het" title="7" id="input_40_7" value="7" /><label for="input_40_7">7</label></div>
+                <div class="rating-item"><input aria-labelledby="label_input_40" class="form-radio" type="radio" name="q40_6Het" title="8" id="input_40_8" value="8" /><label for="input_40_8">8</label></div>
+                <div class="rating-item"><input aria-labelledby="label_input_40" class="form-radio" type="radio" name="q40_6Het" title="9" id="input_40_9" value="9" /><label for="input_40_9">9</label></div>
+                <div class="rating-item"><span class="rating-item-title for-to"><label for="input_40_best" aria-hidden="true">Volledig</label></span><input aria-labelledby="label_input_40" class="form-radio" type="radio" name="q40_6Het" title="10" id="input_40_10" value="10" /><label for="input_40_10">10</label></div>
+              </div>
+            </div><label class="form-sub-label" id="sublabel_input_40_description" style="border:0;clip:rect(0 0 0 0);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px;white-space:nowrap">1 is Helemaal niet , 10 is Volledig</label>
+          </span> </div>
+      </li>
+      <li class="form-line" data-type="control_textarea" id="id_41"><label class="form-label form-label-top form-label-auto" id="label_41" for="input_41"> Toelichting/voorbeeld: </label>
+        <div id="cid_41" class="form-input-wide" data-layout="full"> <textarea id="input_41" class="form-textarea" name="q41_toelichtingvoorbeeld" style="width:648px;height:50px" data-component="textarea" aria-labelledby="label_41"></textarea> </div>
+      </li>
+      <li class="form-line" data-type="control_scale" id="id_42"><label class="form-label form-label-top form-label-auto" id="label_42" for="input_42"> 7. Aanwezigheid en aandacht tijdens de sessies </label>
+        <div id="cid_42" class="form-input-wide" data-layout="full"> <span class="form-sub-label-container" style="vertical-align:top">
+            <div role="radiogroup" aria-labelledby="label_42 sublabel_input_42_description" cellPadding="4" cellSpacing="0" class="form-scale-table" data-component="scale">
+              <div class="rating-item-group">
+                <div class="rating-item"><span class="rating-item-title for-from"><label for="input_42_worst" aria-hidden="true">Helemaal niet </label></span><input aria-labelledby="label_input_42" class="form-radio" type="radio" name="q42_7Aanwezigheid" title="1" id="input_42_1" value="1" /><label for="input_42_1">1</label></div>
+                <div class="rating-item"><input aria-labelledby="label_input_42" class="form-radio" type="radio" name="q42_7Aanwezigheid" title="2" id="input_42_2" value="2" /><label for="input_42_2">2</label></div>
+                <div class="rating-item"><input aria-labelledby="label_input_42" class="form-radio" type="radio" name="q42_7Aanwezigheid" title="3" id="input_42_3" value="3" /><label for="input_42_3">3</label></div>
+                <div class="rating-item"><input aria-labelledby="label_input_42" class="form-radio" type="radio" name="q42_7Aanwezigheid" title="4" id="input_42_4" value="4" /><label for="input_42_4">4</label></div>
+                <div class="rating-item"><input aria-labelledby="label_input_42" class="form-radio" type="radio" name="q42_7Aanwezigheid" title="5" id="input_42_5" value="5" /><label for="input_42_5">5</label></div>
+                <div class="rating-item"><input aria-labelledby="label_input_42" class="form-radio" type="radio" name="q42_7Aanwezigheid" title="6" id="input_42_6" value="6" /><label for="input_42_6">6</label></div>
+                <div class="rating-item"><input aria-labelledby="label_input_42" class="form-radio" type="radio" name="q42_7Aanwezigheid" title="7" id="input_42_7" value="7" /><label for="input_42_7">7</label></div>
+                <div class="rating-item"><input aria-labelledby="label_input_42" class="form-radio" type="radio" name="q42_7Aanwezigheid" title="8" id="input_42_8" value="8" /><label for="input_42_8">8</label></div>
+                <div class="rating-item"><input aria-labelledby="label_input_42" class="form-radio" type="radio" name="q42_7Aanwezigheid" title="9" id="input_42_9" value="9" /><label for="input_42_9">9</label></div>
+                <div class="rating-item"><span class="rating-item-title for-to"><label for="input_42_best" aria-hidden="true">Volledig</label></span><input aria-labelledby="label_input_42" class="form-radio" type="radio" name="q42_7Aanwezigheid" title="10" id="input_42_10" value="10" /><label for="input_42_10">10</label></div>
+              </div>
+            </div><label class="form-sub-label" id="sublabel_input_42_description" style="border:0;clip:rect(0 0 0 0);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px;white-space:nowrap">1 is Helemaal niet , 10 is Volledig</label>
+          </span> </div>
+      </li>
+      <li class="form-line" data-type="control_textarea" id="id_45"><label class="form-label form-label-top form-label-auto" id="label_45" for="input_45"> Toelichting/voorbeeld: </label>
+        <div id="cid_45" class="form-input-wide" data-layout="full"> <textarea id="input_45" class="form-textarea" name="q45_toelichtingvoorbeeld45" style="width:648px;height:50px" data-component="textarea" aria-labelledby="label_45"></textarea> </div>
+      </li>
+      <li class="form-line" data-type="control_scale" id="id_44"><label class="form-label form-label-top form-label-auto" id="label_44" for="input_44"> 8. Actief en aandachtig luisteren </label>
+        <div id="cid_44" class="form-input-wide" data-layout="full"> <span class="form-sub-label-container" style="vertical-align:top">
+            <div role="radiogroup" aria-labelledby="label_44 sublabel_input_44_description" cellPadding="4" cellSpacing="0" class="form-scale-table" data-component="scale">
+              <div class="rating-item-group">
+                <div class="rating-item"><span class="rating-item-title for-from"><label for="input_44_worst" aria-hidden="true">Helemaal niet </label></span><input aria-labelledby="label_input_44" class="form-radio" type="radio" name="q44_8Actief" title="1" id="input_44_1" value="1" /><label for="input_44_1">1</label></div>
+                <div class="rating-item"><input aria-labelledby="label_input_44" class="form-radio" type="radio" name="q44_8Actief" title="2" id="input_44_2" value="2" /><label for="input_44_2">2</label></div>
+                <div class="rating-item"><input aria-labelledby="label_input_44" class="form-radio" type="radio" name="q44_8Actief" title="3" id="input_44_3" value="3" /><label for="input_44_3">3</label></div>
+                <div class="rating-item"><input aria-labelledby="label_input_44" class="form-radio" type="radio" name="q44_8Actief" title="4" id="input_44_4" value="4" /><label for="input_44_4">4</label></div>
+                <div class="rating-item"><input aria-labelledby="label_input_44" class="form-radio" type="radio" name="q44_8Actief" title="5" id="input_44_5" value="5" /><label for="input_44_5">5</label></div>
+                <div class="rating-item"><input aria-labelledby="label_input_44" class="form-radio" type="radio" name="q44_8Actief" title="6" id="input_44_6" value="6" /><label for="input_44_6">6</label></div>
+                <div class="rating-item"><input aria-labelledby="label_input_44" class="form-radio" type="radio" name="q44_8Actief" title="7" id="input_44_7" value="7" /><label for="input_44_7">7</label></div>
+                <div class="rating-item"><input aria-labelledby="label_input_44" class="form-radio" type="radio" name="q44_8Actief" title="8" id="input_44_8" value="8" /><label for="input_44_8">8</label></div>
+                <div class="rating-item"><input aria-labelledby="label_input_44" class="form-radio" type="radio" name="q44_8Actief" title="9" id="input_44_9" value="9" /><label for="input_44_9">9</label></div>
+                <div class="rating-item"><span class="rating-item-title for-to"><label for="input_44_best" aria-hidden="true">Volledig</label></span><input aria-labelledby="label_input_44" class="form-radio" type="radio" name="q44_8Actief" title="10" id="input_44_10" value="10" /><label for="input_44_10">10</label></div>
+              </div>
+            </div><label class="form-sub-label" id="sublabel_input_44_description" style="border:0;clip:rect(0 0 0 0);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px;white-space:nowrap">1 is Helemaal niet , 10 is Volledig</label>
+          </span> </div>
+      </li>
+      <li class="form-line" data-type="control_textarea" id="id_43"><label class="form-label form-label-top form-label-auto" id="label_43" for="input_43"> Toelichting/voorbeeld: </label>
+        <div id="cid_43" class="form-input-wide" data-layout="full"> <textarea id="input_43" class="form-textarea" name="q43_toelichtingvoorbeeld43" style="width:648px;height:50px" data-component="textarea" aria-labelledby="label_43"></textarea> </div>
+      </li>
+      <li class="form-line" data-type="control_scale" id="id_47"><label class="form-label form-label-top form-label-auto" id="label_47" for="input_47"> 9. Het stellen van krachtige, op inzicht gerichte vragen </label>
+        <div id="cid_47" class="form-input-wide" data-layout="full"> <span class="form-sub-label-container" style="vertical-align:top">
+            <div role="radiogroup" aria-labelledby="label_47 sublabel_input_47_description" cellPadding="4" cellSpacing="0" class="form-scale-table" data-component="scale">
+              <div class="rating-item-group">
+                <div class="rating-item"><span class="rating-item-title for-from"><label for="input_47_worst" aria-hidden="true">Helemaal niet </label></span><input aria-labelledby="label_input_47" class="form-radio" type="radio" name="q47_9Het" title="1" id="input_47_1" value="1" /><label for="input_47_1">1</label></div>
+                <div class="rating-item"><input aria-labelledby="label_input_47" class="form-radio" type="radio" name="q47_9Het" title="2" id="input_47_2" value="2" /><label for="input_47_2">2</label></div>
+                <div class="rating-item"><input aria-labelledby="label_input_47" class="form-radio" type="radio" name="q47_9Het" title="3" id="input_47_3" value="3" /><label for="input_47_3">3</label></div>
+                <div class="rating-item"><input aria-labelledby="label_input_47" class="form-radio" type="radio" name="q47_9Het" title="4" id="input_47_4" value="4" /><label for="input_47_4">4</label></div>
+                <div class="rating-item"><input aria-labelledby="label_input_47" class="form-radio" type="radio" name="q47_9Het" title="5" id="input_47_5" value="5" /><label for="input_47_5">5</label></div>
+                <div class="rating-item"><input aria-labelledby="label_input_47" class="form-radio" type="radio" name="q47_9Het" title="6" id="input_47_6" value="6" /><label for="input_47_6">6</label></div>
+                <div class="rating-item"><input aria-labelledby="label_input_47" class="form-radio" type="radio" name="q47_9Het" title="7" id="input_47_7" value="7" /><label for="input_47_7">7</label></div>
+                <div class="rating-item"><input aria-labelledby="label_input_47" class="form-radio" type="radio" name="q47_9Het" title="8" id="input_47_8" value="8" /><label for="input_47_8">8</label></div>
+                <div class="rating-item"><input aria-labelledby="label_input_47" class="form-radio" type="radio" name="q47_9Het" title="9" id="input_47_9" value="9" /><label for="input_47_9">9</label></div>
+                <div class="rating-item"><span class="rating-item-title for-to"><label for="input_47_best" aria-hidden="true">Volledig</label></span><input aria-labelledby="label_input_47" class="form-radio" type="radio" name="q47_9Het" title="10" id="input_47_10" value="10" /><label for="input_47_10">10</label></div>
+              </div>
+            </div><label class="form-sub-label" id="sublabel_input_47_description" style="border:0;clip:rect(0 0 0 0);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px;white-space:nowrap">1 is Helemaal niet , 10 is Volledig</label>
+          </span> </div>
+      </li>
+      <li class="form-line" data-type="control_textarea" id="id_49"><label class="form-label form-label-top form-label-auto" id="label_49" for="input_49"> Toelichting/voorbeeld: </label>
+        <div id="cid_49" class="form-input-wide" data-layout="full"> <textarea id="input_49" class="form-textarea" name="q49_toelichtingvoorbeeld49" style="width:648px;height:50px" data-component="textarea" aria-labelledby="label_49"></textarea> </div>
+      </li>
+      <li class="form-line" data-type="control_scale" id="id_48"><label class="form-label form-label-top form-label-auto" id="label_48" for="input_48"> 10. Het stimuleren van leren, reflectie en bewustwording </label>
+        <div id="cid_48" class="form-input-wide" data-layout="full"> <span class="form-sub-label-container" style="vertical-align:top">
+            <div role="radiogroup" aria-labelledby="label_48 sublabel_input_48_description" cellPadding="4" cellSpacing="0" class="form-scale-table" data-component="scale">
+              <div class="rating-item-group">
+                <div class="rating-item"><span class="rating-item-title for-from"><label for="input_48_worst" aria-hidden="true">Helemaal niet </label></span><input aria-labelledby="label_input_48" class="form-radio" type="radio" name="q48_10Het" title="1" id="input_48_1" value="1" /><label for="input_48_1">1</label></div>
+                <div class="rating-item"><input aria-labelledby="label_input_48" class="form-radio" type="radio" name="q48_10Het" title="2" id="input_48_2" value="2" /><label for="input_48_2">2</label></div>
+                <div class="rating-item"><input aria-labelledby="label_input_48" class="form-radio" type="radio" name="q48_10Het" title="3" id="input_48_3" value="3" /><label for="input_48_3">3</label></div>
+                <div class="rating-item"><input aria-labelledby="label_input_48" class="form-radio" type="radio" name="q48_10Het" title="4" id="input_48_4" value="4" /><label for="input_48_4">4</label></div>
+                <div class="rating-item"><input aria-labelledby="label_input_48" class="form-radio" type="radio" name="q48_10Het" title="5" id="input_48_5" value="5" /><label for="input_48_5">5</label></div>
+                <div class="rating-item"><input aria-labelledby="label_input_48" class="form-radio" type="radio" name="q48_10Het" title="6" id="input_48_6" value="6" /><label for="input_48_6">6</label></div>
+                <div class="rating-item"><input aria-labelledby="label_input_48" class="form-radio" type="radio" name="q48_10Het" title="7" id="input_48_7" value="7" /><label for="input_48_7">7</label></div>
+                <div class="rating-item"><input aria-labelledby="label_input_48" class="form-radio" type="radio" name="q48_10Het" title="8" id="input_48_8" value="8" /><label for="input_48_8">8</label></div>
+                <div class="rating-item"><input aria-labelledby="label_input_48" class="form-radio" type="radio" name="q48_10Het" title="9" id="input_48_9" value="9" /><label for="input_48_9">9</label></div>
+                <div class="rating-item"><span class="rating-item-title for-to"><label for="input_48_best" aria-hidden="true">Volledig</label></span><input aria-labelledby="label_input_48" class="form-radio" type="radio" name="q48_10Het" title="10" id="input_48_10" value="10" /><label for="input_48_10">10</label></div>
+              </div>
+            </div><label class="form-sub-label" id="sublabel_input_48_description" style="border:0;clip:rect(0 0 0 0);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px;white-space:nowrap">1 is Helemaal niet , 10 is Volledig</label>
+          </span> </div>
+      </li>
+      <li class="form-line" data-type="control_textarea" id="id_53"><label class="form-label form-label-top form-label-auto" id="label_53" for="input_53"> Toelichting/voorbeeld: </label>
+        <div id="cid_53" class="form-input-wide" data-layout="full"> <textarea id="input_53" class="form-textarea" name="q53_toelichtingvoorbeeld53" style="width:648px;height:50px" data-component="textarea" aria-labelledby="label_53"></textarea> </div>
+      </li>
+      <li class="form-line" data-type="control_scale" id="id_52"><label class="form-label form-label-top form-label-auto" id="label_52" for="input_52"> 11. Het ondersteunen bij het formuleren en behalen van doelen </label>
+        <div id="cid_52" class="form-input-wide" data-layout="full"> <span class="form-sub-label-container" style="vertical-align:top">
+            <div role="radiogroup" aria-labelledby="label_52 sublabel_input_52_description" cellPadding="4" cellSpacing="0" class="form-scale-table" data-component="scale">
+              <div class="rating-item-group">
+                <div class="rating-item"><span class="rating-item-title for-from"><label for="input_52_worst" aria-hidden="true">Helemaal niet </label></span><input aria-labelledby="label_input_52" class="form-radio" type="radio" name="q52_11Het52" title="1" id="input_52_1" value="1" /><label for="input_52_1">1</label></div>
+                <div class="rating-item"><input aria-labelledby="label_input_52" class="form-radio" type="radio" name="q52_11Het52" title="2" id="input_52_2" value="2" /><label for="input_52_2">2</label></div>
+                <div class="rating-item"><input aria-labelledby="label_input_52" class="form-radio" type="radio" name="q52_11Het52" title="3" id="input_52_3" value="3" /><label for="input_52_3">3</label></div>
+                <div class="rating-item"><input aria-labelledby="label_input_52" class="form-radio" type="radio" name="q52_11Het52" title="4" id="input_52_4" value="4" /><label for="input_52_4">4</label></div>
+                <div class="rating-item"><input aria-labelledby="label_input_52" class="form-radio" type="radio" name="q52_11Het52" title="5" id="input_52_5" value="5" /><label for="input_52_5">5</label></div>
+                <div class="rating-item"><input aria-labelledby="label_input_52" class="form-radio" type="radio" name="q52_11Het52" title="6" id="input_52_6" value="6" /><label for="input_52_6">6</label></div>
+                <div class="rating-item"><input aria-labelledby="label_input_52" class="form-radio" type="radio" name="q52_11Het52" title="7" id="input_52_7" value="7" /><label for="input_52_7">7</label></div>
+                <div class="rating-item"><input aria-labelledby="label_input_52" class="form-radio" type="radio" name="q52_11Het52" title="8" id="input_52_8" value="8" /><label for="input_52_8">8</label></div>
+                <div class="rating-item"><input aria-labelledby="label_input_52" class="form-radio" type="radio" name="q52_11Het52" title="9" id="input_52_9" value="9" /><label for="input_52_9">9</label></div>
+                <div class="rating-item"><span class="rating-item-title for-to"><label for="input_52_best" aria-hidden="true">Volledig</label></span><input aria-labelledby="label_input_52" class="form-radio" type="radio" name="q52_11Het52" title="10" id="input_52_10" value="10" /><label for="input_52_10">10</label></div>
+              </div>
+            </div><label class="form-sub-label" id="sublabel_input_52_description" style="border:0;clip:rect(0 0 0 0);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px;white-space:nowrap">1 is Helemaal niet , 10 is Volledig</label>
+          </span> </div>
+      </li>
+      <li class="form-line" data-type="control_textarea" id="id_51"><label class="form-label form-label-top form-label-auto" id="label_51" for="input_51"> Toelichting/voorbeeld: </label>
+        <div id="cid_51" class="form-input-wide" data-layout="full"> <textarea id="input_51" class="form-textarea" name="q51_toelichtingvoorbeeld51" style="width:648px;height:50px" data-component="textarea" aria-labelledby="label_51"></textarea> </div>
+      </li>
+      <li class="form-line" data-type="control_scale" id="id_50"><label class="form-label form-label-top form-label-auto" id="label_50" for="input_50"> 12. Het hanteren van het coachproces en de structuur van de sessies </label>
+        <div id="cid_50" class="form-input-wide" data-layout="full"> <span class="form-sub-label-container" style="vertical-align:top">
+            <div role="radiogroup" aria-labelledby="label_50 sublabel_input_50_description" cellPadding="4" cellSpacing="0" class="form-scale-table" data-component="scale">
+              <div class="rating-item-group">
+                <div class="rating-item"><span class="rating-item-title for-from"><label for="input_50_worst" aria-hidden="true">Helemaal niet </label></span><input aria-labelledby="label_input_50" class="form-radio" type="radio" name="q50_12Het" title="1" id="input_50_1" value="1" /><label for="input_50_1">1</label></div>
+                <div class="rating-item"><input aria-labelledby="label_input_50" class="form-radio" type="radio" name="q50_12Het" title="2" id="input_50_2" value="2" /><label for="input_50_2">2</label></div>
+                <div class="rating-item"><input aria-labelledby="label_input_50" class="form-radio" type="radio" name="q50_12Het" title="3" id="input_50_3" value="3" /><label for="input_50_3">3</label></div>
+                <div class="rating-item"><input aria-labelledby="label_input_50" class="form-radio" type="radio" name="q50_12Het" title="4" id="input_50_4" value="4" /><label for="input_50_4">4</label></div>
+                <div class="rating-item"><input aria-labelledby="label_input_50" class="form-radio" type="radio" name="q50_12Het" title="5" id="input_50_5" value="5" /><label for="input_50_5">5</label></div>
+                <div class="rating-item"><input aria-labelledby="label_input_50" class="form-radio" type="radio" name="q50_12Het" title="6" id="input_50_6" value="6" /><label for="input_50_6">6</label></div>
+                <div class="rating-item"><input aria-labelledby="label_input_50" class="form-radio" type="radio" name="q50_12Het" title="7" id="input_50_7" value="7" /><label for="input_50_7">7</label></div>
+                <div class="rating-item"><input aria-labelledby="label_input_50" class="form-radio" type="radio" name="q50_12Het" title="8" id="input_50_8" value="8" /><label for="input_50_8">8</label></div>
+                <div class="rating-item"><input aria-labelledby="label_input_50" class="form-radio" type="radio" name="q50_12Het" title="9" id="input_50_9" value="9" /><label for="input_50_9">9</label></div>
+                <div class="rating-item"><span class="rating-item-title for-to"><label for="input_50_best" aria-hidden="true">Volledig</label></span><input aria-labelledby="label_input_50" class="form-radio" type="radio" name="q50_12Het" title="10" id="input_50_10" value="10" /><label for="input_50_10">10</label></div>
+              </div>
+            </div><label class="form-sub-label" id="sublabel_input_50_description" style="border:0;clip:rect(0 0 0 0);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px;white-space:nowrap">1 is Helemaal niet , 10 is Volledig</label>
+          </span> </div>
+      </li>
+      <li class="form-line" data-type="control_textarea" id="id_46"><label class="form-label form-label-top form-label-auto" id="label_46" for="input_46"> Toelichting/voorbeeld: </label>
+        <div id="cid_46" class="form-input-wide" data-layout="full"> <textarea id="input_46" class="form-textarea" name="q46_toelichtingvoorbeeld46" style="width:648px;height:50px" data-component="textarea" aria-labelledby="label_46"></textarea> </div>
+      </li>
+      <li class="form-line" data-type="control_textarea" id="id_15"><label class="form-label form-label-top form-label-auto" id="label_15" for="input_15"> 13. Wat had ik als coach anders of beter kunnen doen? </label>
+        <div id="cid_15" class="form-input-wide" data-layout="full"> <textarea id="input_15" class="form-textarea" name="q15_13Wat" style="width:648px;height:80px" data-component="textarea" aria-labelledby="label_15"></textarea> </div>
+      </li>
+      <li id="cid_39" class="form-input-wide" data-type="control_head">
+        <div class="form-header-group header-default">
+          <div class="header-text httal htvam">
+            <h2 id="header_39" class="form-header" data-component="header">Toekomst en aanbeveling </h2>
+          </div>
+        </div>
+      </li>
+      <li class="form-line" data-type="control_textarea" id="id_54"><label class="form-label form-label-top form-label-auto" id="label_54" for="input_54"> 14. Wat neem je mee naar de toekomst? Welke verandering houd je vast? </label>
+        <div id="cid_54" class="form-input-wide" data-layout="full"> <textarea id="input_54" class="form-textarea" name="q54_14Wat54" style="width:648px;height:80px" data-component="textarea" aria-labelledby="label_54"></textarea> </div>
+      </li>
+      <li class="form-line" data-type="control_checkbox" id="id_16"><span class="form-label form-label-top form-label-auto" id="label_16"> 15. Zou je mij aan anderen aanbevelen? </span>
+        <div id="cid_16" class="form-input-wide" data-layout="full">
+          <div class="form-single-column" role="group" aria-labelledby="label_16" data-component="checkbox"><span class="form-checkbox-item" style="clear:left"><span class="dragger-item"></span><input type="checkbox" class="form-checkbox" id="input_16_0" name="q16_15Zou[]" aria-labelledby="label_input_16_0" value="Ja" /><label aria-hidden="true" id="label_input_16_0" for="input_16_0">Ja</label></span><span class="form-checkbox-item" style="clear:left"><span class="dragger-item"></span><input type="checkbox" class="form-checkbox" id="input_16_1" name="q16_15Zou[]" aria-labelledby="label_input_16_1" value="Nee" /><label aria-hidden="true" id="label_input_16_1" for="input_16_1">Nee</label></span><span class="form-checkbox-item" style="clear:left"><span class="dragger-item"></span><input type="checkbox" class="form-checkbox" id="input_16_2" name="q16_15Zou[]" aria-labelledby="label_input_16_2" value="Misschien" /><label aria-hidden="true" id="label_input_16_2" for="input_16_2">Misschien</label></span></div>
+        </div>
+      </li>
+      <li class="form-line" data-type="control_textarea" id="id_55"><label class="form-label form-label-top form-label-auto" id="label_55" for="input_55"> Toelichting: </label>
+        <div id="cid_55" class="form-input-wide" data-layout="full"> <textarea id="input_55" class="form-textarea" name="q55_toelichting55" style="width:648px;height:50px" data-component="textarea" aria-labelledby="label_55"></textarea> </div>
       </li>
       <li id="cid_17" class="form-input-wide" data-type="control_head">
         <div class="form-header-group header-small">
           <div class="header-text httal htvam">
             <h3 id="header_17" class="form-header" data-component="header">Toestemming en ondertekening </h3>
-            <div id="subHeader_17" class="form-subHeader">Met mijn handtekening bevestig ik dat: <p>• Ik heb dit evaluatieformulier naar waarheid ingevuld;<p> • Ik geef Mariëtte Ham toestemming om deze evaluatie te gebruiken als (geanonimiseerde) onderbouwing voor haar professionele ontwikkeling, accreditatie (NOBCO/EMCC) en kwaliteitsbeleid. </div>
+            <div id="subHeader_17" class="form-subHeader">Met mijn handtekening bevestig ik dat: <p>• Ik heb dit evaluatieformulier naar waarheid ingevuld; <p>• Ik geef Mariëtte Ham toestemming om deze evaluatie te gebruiken als (geanonimiseerde) onderbouwing voor haar professionele ontwikkeling, accreditatie (NOBCO/EMCC) en kwaliteitsbeleid. </div>
           </div>
         </div>
       </li>
@@ -361,7 +693,7 @@ JotForm.paymentExtrasOnTheFly([null,{"name":"heading","qid":"1","text":"Evaluati
       <li class="form-line form-line-column form-col-1" data-type="control_datetime" id="id_19"><span class="form-label form-label-top" id="label_19"> Datum </span>
         <div id="cid_19" class="form-input-wide" data-layout="half">
           <div data-wrapper-react="true" role="group" aria-labelledby="label_19">
-            <div style="display:none"><span class="form-sub-label-container" style="vertical-align:top"><input class="form-textbox validate[limitDate]" id="month_19" name="q19_datum[month]" type="tel" size="2" data-maxlength="2" data-age="" maxLength="2" autoComplete="off" value="" /><span class="date-separate" aria-hidden="true"> -</span><label class="form-sub-label" for="month_19" id="sublabel_19_month" style="min-height:13px">Maand</label></span><span class="form-sub-label-container" style="vertical-align:top"><input class="form-textbox validate[limitDate]" id="day_19" name="q19_datum[day]" type="tel" size="2" data-maxlength="2" data-age="" maxLength="2" autoComplete="off" value="" /><span class="date-separate" aria-hidden="true"> -</span><label class="form-sub-label" for="day_19" id="sublabel_19_day" style="min-height:13px">Dag</label></span><span class="form-sub-label-container" style="vertical-align:top"><input class="form-textbox validate[limitDate]" id="year_19" name="q19_datum[year]" type="tel" size="4" data-maxlength="4" data-age="" maxLength="4" autoComplete="off" value="" /><label class="form-sub-label" for="year_19" id="sublabel_19_year" style="min-height:13px">Jaar</label></span></div><span class="form-sub-label-container" style="vertical-align:top"><input class="form-textbox validate[limitDate, validateLiteDate]" id="lite_mode_19" type="text" size="12" data-maxlength="12" maxLength="12" data-age="" data-format="mmddyyyy" data-seperator="-" placeholder="MM-DD-JJJJ" data-placeholder="MM-DD-YYYY" autoComplete="off" value="" /><button type="button" class=" newDefaultTheme-dateIcon focusable icon-liteMode" id="input_19_pick" data-component="datetime" aria-label="Choose date" aria-controls="calendar_19" aria-haspopup="dialog" aria-expanded="false" data-allow-time="No" data-version="v2"></button><label class="form-sub-label" for="lite_mode_19" id="sublabel_19_litemode" style="min-height:13px">Datum</label></span>
+            <div style="display:none"><span class="form-sub-label-container" style="vertical-align:top"><input class="form-textbox validate[limitDate]" id="month_19" name="q19_datum[month]" type="tel" size="2" data-maxlength="2" data-age="" maxLength="2" autoComplete="off" value="" /><span class="date-separate" aria-hidden="true"> -</span><label class="form-sub-label" for="month_19" id="sublabel_19_month" style="min-height:13px">Maand</label></span><span class="form-sub-label-container" style="vertical-align:top"><input class="form-textbox validate[limitDate]" id="day_19" name="q19_datum[day]" type="tel" size="2" data-maxlength="2" data-age="" maxLength="2" autoComplete="off" value="" /><span class="date-separate" aria-hidden="true"> -</span><label class="form-sub-label" for="day_19" id="sublabel_19_day" style="min-height:13px">Dag</label></span><span class="form-sub-label-container" style="vertical-align:top"><input class="form-textbox validate[limitDate]" id="year_19" name="q19_datum[year]" type="tel" size="4" data-maxlength="4" data-age="" maxLength="4" autoComplete="off" value="" /><label class="form-sub-label" for="year_19" id="sublabel_19_year" style="min-height:13px">Jaar</label></span></div><span class="form-sub-label-container" style="vertical-align:top"><input class="form-textbox validate[limitDate, validateLiteDate]" id="lite_mode_19" type="text" size="12" data-maxlength="12" maxLength="12" data-age="" data-format="mmddyyyy" data-seperator="-" placeholder="MM-DD-YYYY" data-placeholder="MM-DD-YYYY" autoComplete="off" value="" /><button type="button" class=" newDefaultTheme-dateIcon focusable icon-liteMode" id="input_19_pick" data-component="datetime" aria-label="Choose date" aria-controls="calendar_19" aria-haspopup="dialog" aria-expanded="false" data-allow-time="No" data-version="v2"></button><label class="form-sub-label" for="lite_mode_19" id="sublabel_19_litemode" style="min-height:13px">Datum</label></span>
           </div>
         </div>
       </li>
@@ -383,7 +715,12 @@ JotForm.paymentExtrasOnTheFly([null,{"name":"heading","qid":"1","text":"Evaluati
       <li style="display:none">Should be Empty: <input type="text" name="website" value="" type="hidden" /></li>
     </ul>
   </div>
-<input type="hidden" class="simple_spc" id="simple_spc" name="simple_spc" value="261224356006044" />
+  <script>
+    JotForm.showJotFormPowered = "new_footer";
+  </script>
+  <script>
+    JotForm.poweredByText = "Powered by Jotform";
+  </script><input type="hidden" class="simple_spc" id="simple_spc" name="simple_spc" value="261224356006044" />
   <script type="text/javascript">
     var all_spc = document.querySelectorAll("form[id='261224356006044'] .si" + "mple" + "_spc");
     for (var i = 0; i < all_spc.length; i++)
